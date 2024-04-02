@@ -5,7 +5,6 @@ from ev3dev2.sensor import INPUT_1, INPUT_3, INPUT_4
 from ev3dev2.sensor.lego import ColorSensor, GyroSensor
 from ev3dev2.button import Button
 import math
-import time
 
 move_motors = MoveSteering(OUTPUT_B, OUTPUT_C)
 motor_right = LargeMotor(OUTPUT_C)
@@ -61,6 +60,36 @@ class beschleunigt:
             move_motors.on(0, speed)
         move_motors.off()
 
+    def drive_for_cm(max_speed, start_speed, cm):
+        #-(x-a)^2*b+c
+        c = max_speed - start_speed
+        b = -c / -((((cm / one_turns_cm)*360) / 2)**2)
+        a = math.sqrt(c / b)
+        c += start_speed
+
+        motor_left.position = 0
+        speed = start_speed
+
+        while speed >= start_speed:
+            x = motor_left.position
+            speed = -((x - a)**2) * b + c
+            move_motors.on(0, speed)
+        move_motors.off()
+
+    def drive_for_cm_back(max_speed, start_speed, cm):
+        c_back = max_speed - start_speed
+        b_back = -c_back / -((((cm / one_turns_cm)*360) / 2)**2)
+        a_back = math.sqrt(c_back / b_back)
+        c_back += start_speed
+
+        motor_left.position = 0
+        speed_back = start_speed
+
+        while speed_back >= start_speed:
+            x_back = -motor_left.position
+            speed_back = -((x_back - a_back)**2) * b_back + c_back
+            move_motors.on(0, -speed_back)
+        move_motors.off()
 
 
 
@@ -97,15 +126,15 @@ class turn_on_spot_for_degrees:
     motor_rotations_for_full_turn = None #how many motor rotations are needed for a 360° turn
 
     def set_motor_rotations_for_full_turn(value):
-        global motor_rotations_for_full_turn
-        motor_rotations_for_full_turn = value
+        global motor_rotations_for_full_turnn
+        motor_rotations_for_full_turnn = value
 
     def turn(speed, degrees):
-        rotations = motor_rotations_for_full_turn / (360 / degrees)
+        rotations = motor_rotations_for_full_turnn / (360 / degrees)
         move_motors.on_for_rotations(100, speed, rotations)
 
     def turn_beschleunigt(max_speed, start_speed, degrees, side):
-        degrees = (motor_rotations_for_full_turn / (360 / degrees)) * 360
+        degrees = (motor_rotations_for_full_turnn / (360 / degrees)) * 360
 
         #-(x-a)^2*b+c
         c = max_speed - start_speed
