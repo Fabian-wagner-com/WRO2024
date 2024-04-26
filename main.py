@@ -37,7 +37,7 @@ def ausparken2():
     drive_for_cm.drive(10, 2.9)
     turn_for_degrees.turn(15, 44, "right")
     drive_for_cm.drive(-10, 7.5)
-    turn_for_degrees.turn(-15, 13.5, "right")
+    turn_for_degrees.turn(-15, 13.6, "right")
 
 def ausparken3():
     #ausparken
@@ -46,7 +46,7 @@ def ausparken3():
     drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
     drive_for_cm.drive(-10, 7.7)
-    turn_for_degrees.turn(-15, 12.5, "right")
+    turn_for_degrees.turn(-15, 12.2, "right")
 
 def ausparken4():
     #ausparken
@@ -54,8 +54,8 @@ def ausparken4():
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
-    drive_for_cm.drive(-10, 7.4)
-    turn_for_degrees.turn(-15, 11.4, "right")
+    drive_for_cm.drive(-10, 7.3)
+    turn_for_degrees.turn(-15, 11.2, "right")
 
 
 
@@ -63,7 +63,7 @@ def absetzen():
     #absetzen
     motor_ele.on_for_rotations(50, 0.35)
     motor_zang.on_for_rotations(-50, 1)
-    motor_ele.on_for_rotations(-50, 0.7)
+    motor_ele.on_for_rotations(-50, 0.9)
     drive_for_cm.drive(5, 8.4)
 
 def drifeToBrown():
@@ -144,7 +144,7 @@ motor_ele.on_for_rotations(-50, fahrstulbewegung)
 turn_for_degrees.turn(35, 128, "right")
 drive_for_cm.drive(65, 83)
 turn_for_degrees.turn(35, 37, "left")
-drive_for_cm.drive(35, 28.3)
+drive_for_cm.drive(35, 27.5)
 time.sleep(0.2)
 drive_for_cm.drive(-10, wall_distance_red)
 
@@ -183,7 +183,7 @@ drive_for_cm.drive(52, 50)
 turn_for_degrees.turn(-35, 44, "right")
 drive_for_cm.drive(-45, 17.9)
 turn_for_degrees.turn(-35, 90, "right")
-motor_ele.on_for_rotations(60, 0.5)
+motor_ele.on_for_rotations(60, 0.7)
 drive_for_cm.drive(-45, 9.7)
 
 #Klempner spielen  --> Wasserleitung reparerien
@@ -209,12 +209,11 @@ drive_for_cm.drive(-15, 6)
 drifeToBrown()
 
 
-motor_ele.on_for_rotations(60, 0.3)
 drive_for_cm.drive(-30, 19.6)
 
 #einsammeln
 #motor_zang.on_for_rotations(-50, 1.2)
-motor_ele.on_for_rotations(50, fahrstulbewegung)
+motor_ele.on_for_rotations(50, fahrstulbewegung + 0.4)
 motor_zang.on_for_rotations(50, 1)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
@@ -229,8 +228,8 @@ motor_ele.on_for_rotations(-50, fahrstulbewegung)
 #rüber fahren
 turn_for_degrees.turn(35, 120, "right")
 drive_for_cm.drive(70, 90)
-turn_for_degrees.turn(30, 30, "left")
-drive_for_cm.drive(50, 10)
+turn_for_degrees.turn(70, 30, "left")
+drive_for_cm.drive(50, 12)
 drive_for_cm.drive(-10, wall_distance_green)
 
 ausparken4()
@@ -250,6 +249,12 @@ motor_zang.on_for_rotations(-50, 1.4)
 motor_ele.on_for_rotations(50, fahrstulbewegung)
 motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
+
+#zum Gelben Abstellbereich
+turn_for_degrees.turn(30, 102, "right")
+drive_for_cm.drive(50, 49)
+absetzen()
+
 
 
 
