@@ -393,7 +393,13 @@ class align_line:
 
 
 #functions
-#-------------------------------
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
 
 def ausparken():
     #ausparken
@@ -401,8 +407,8 @@ def ausparken():
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
-    drive_for_cm.drive(-10, 9.2)
-    turn_for_degrees.turn(-15, 10.5, "right")
+    drive_for_cm.drive(-10, 9)
+    turn_for_degrees.turn(-15, 11.65, "right")
 
 
 def ausparken2():
@@ -411,8 +417,8 @@ def ausparken2():
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 2.9)
     turn_for_degrees.turn(15, 44, "right")
-    drive_for_cm.drive(-10, 7.5)
-    turn_for_degrees.turn(-15, 13.6, "right")
+    drive_for_cm.drive(-10, 8.1)
+    turn_for_degrees.turn(-15, 14, "right")
 
 def ausparken3():
     #ausparken
@@ -420,8 +426,8 @@ def ausparken3():
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
-    drive_for_cm.drive(-10, 7.7)
-    turn_for_degrees.turn(-15, 12.2, "right")
+    drive_for_cm.drive(-10, 7.5)
+    turn_for_degrees.turn(-15, 12.7, "right")
 
 def ausparken4():
     #ausparken
@@ -430,7 +436,31 @@ def ausparken4():
     drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
     drive_for_cm.drive(-10, 7.3)
-    turn_for_degrees.turn(-15, 11.2, "right")
+    turn_for_degrees.turn(-15, 12, "right")
+
+
+
+#startfeeld red
+#------------------
+def ausparkenRed():
+    #ausparken
+    turn_for_degrees.turn(-15, 40, "left")
+    turn_for_degrees.turn(15, 20, "right")
+    drive_for_cm.drive(10, 3.1)
+    turn_for_degrees.turn(15, 44, "right")
+    drive_for_cm.drive(-10, 8.5)
+    turn_for_degrees.turn(-15, 10.7, "right")
+
+
+def ausparken2Red():
+     #ausparken
+    turn_for_degrees.turn(-15, 40, "left")
+    turn_for_degrees.turn(15, 20, "right")
+    drive_for_cm.drive(10, 2.9)
+    turn_for_degrees.turn(15, 44, "right")
+    drive_for_cm.drive(-10, 7.6)
+    turn_for_degrees.turn(-15, 13, "right")
+
 
 
 
@@ -438,8 +468,9 @@ def absetzen():
     #absetzen
     motor_ele.on_for_rotations(50, 0.35)
     motor_zang.on_for_rotations(-50, 1)
-    motor_ele.on_for_rotations(-50, 0.9)
+    motor_ele.on_for_rotations(-50, 0.85)
     drive_for_cm.drive(5, 8.4)
+
 
 def drifeToBrown():
     reflection = line_sensor.reflected_light_intensity
@@ -460,10 +491,12 @@ def drifeToBrown():
 #-------------------------------
 
 #Abstand zu den Banden. Fareben bedeuten da, wo die Startbereiche den Farben am nächstens sind.
+startfeeld = "red"
+
 wall_distance_green = 0 # in cm
 wall_distance_red = 1 #in cm
 
-fahrstulbewegung = 0.3 + 0.02
+fahrstulbewegung = 0.32 + 0.01
 
 #steinfarben
 stein1 = ""
@@ -485,6 +518,7 @@ leds.set_color("RIGHT", "RED")
 wait_for_button.wait()
 leds.set_color("LEFT", "GREEN")
 leds.set_color("RIGHT", "GREEN")
+motor_ele.reset()
 time.sleep(0.6)
 start_time = time.time()
 
@@ -493,12 +527,21 @@ motor_ele.on_for_rotations(-50, fahrstulbewegung)
 #programm
 #-------------------------------
 
+
+
 #an der Wand ausrichten
 drive_for_cm.drive(20, 10)
-drive_for_cm.drive(-10, wall_distance_green)
+
+if startfeeld == "green":
+    drive_for_cm.drive(-10, wall_distance_green)
+else:
+    drive_for_cm.drive(-10, wall_distance_red)
 
 #ausparken
-ausparken()
+if startfeeld == "green":
+    ausparken()
+else:
+    ausparkenRed()
 
 beschleunigt.drive_for_cm_back(30, 5, 16)
 
@@ -516,14 +559,26 @@ motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 
 #rüber fahren
-turn_for_degrees.turn(35, 128, "right")
+if startfeeld == "green":
+    turn_for_degrees.turn(35, 127, "right")
+else:
+    turn_for_degrees.turn(35, 127, "right")
+
 drive_for_cm.drive(65, 83)
 turn_for_degrees.turn(35, 37, "left")
-drive_for_cm.drive(35, 27.5)
+drive_for_cm.drive(35, 24.5)
 time.sleep(0.2)
-drive_for_cm.drive(-10, wall_distance_red)
 
-ausparken2() #erstes mal
+if startfeeld == "green":
+    drive_for_cm.drive(-10, wall_distance_red)
+else:
+    drive_for_cm.drive(-10, wall_distance_green)
+
+
+if startfeeld == "green":
+    ausparken2()
+else:
+    ausparken2Red()
 
 #nach hinten fahren bis zu braun
 drifeToBrown()
@@ -544,10 +599,19 @@ motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 #zum abstellen
-turn_for_degrees.turn(35, 88, "right")
-drive_for_cm.drive(30, 43.2)
-turn_on_spot_for_degrees.turn(20, 90)
-drive_for_cm.drive(30, 15.5)
+if startfeeld == "green":
+    turn_for_degrees.turn(35, 88, "right")
+    drive_for_cm.drive(30, 43.2)
+    turn_on_spot_for_degrees.turn(20, 90)
+    drive_for_cm.drive(30, 15.5)
+    
+else:
+    turn_for_degrees.turn(35, 90, "right")
+    drive_for_cm.drive(30, 42.3)
+    turn_on_spot_for_degrees.turn(-20, 90)
+    drive_for_cm.drive(50, 55)
+
+
 absetzen()
 
 #Schrott in d'Eck bringen
@@ -556,9 +620,13 @@ drive_for_cm.drive(52, 50)
 
 #zur Wasserleitung rasen
 turn_for_degrees.turn(-35, 44, "right")
-drive_for_cm.drive(-45, 17.9)
+drive_for_cm.drive(-45, 12.5)
 turn_for_degrees.turn(-35, 90, "right")
-motor_ele.on_for_rotations(60, 0.7)
+while motor_ele.position <= -39:
+    motor_ele.run_forever(speed_sp=500)
+motor_ele.stop()
+
+#motor_ele.on_for_rotations(60, 0.72)
 drive_for_cm.drive(-45, 9.7)
 
 #Klempner spielen  --> Wasserleitung reparerien
@@ -571,7 +639,7 @@ turn_on_spot_for_degrees.turn(35, 26)
 
 drive_for_cm.drive(70, 54)
 turn_for_degrees.turn(30, 70, "right")
-drive_for_cm.drive(40, 22.2)
+drive_for_cm.drive(40, 19.5)
 
 time.sleep(0.2)
 drive_for_cm.drive(-10, wall_distance_red)
@@ -584,12 +652,12 @@ drive_for_cm.drive(-15, 6)
 drifeToBrown()
 
 
-drive_for_cm.drive(-30, 19.6)
+drive_for_cm.drive(-30, 20.1)
 
 #einsammeln
-#motor_zang.on_for_rotations(-50, 1.2)
-motor_ele.on_for_rotations(50, fahrstulbewegung + 0.4)
-motor_zang.on_for_rotations(50, 1)
+motor_zang.on_for_rotations(-50, 0.4)
+motor_ele.on_for_rotations(50, fahrstulbewegung + 0.3)
+motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 drive_for_cm.drive(-20, 9.8)
@@ -608,6 +676,7 @@ drive_for_cm.drive(50, 12)
 drive_for_cm.drive(-10, wall_distance_green)
 
 ausparken4()
+drive_for_cm.drive(-40, 10)
 drifeToBrown()
 
 drive_for_cm.drive(-30, 20)
