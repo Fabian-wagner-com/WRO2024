@@ -407,7 +407,7 @@ def ausparken():
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
-    drive_for_cm.drive(-10, 9)
+    drive_for_cm.drive(-10, 9.3)
     turn_for_degrees.turn(-15, 11.65, "right")
 
 
@@ -418,7 +418,7 @@ def ausparken2():
     drive_for_cm.drive(10, 2.9)
     turn_for_degrees.turn(15, 44, "right")
     drive_for_cm.drive(-10, 8.1)
-    turn_for_degrees.turn(-15, 14, "right")
+    turn_for_degrees.turn(-15, 13.8, "right")
 
 def ausparken3():
     #ausparken
@@ -449,7 +449,7 @@ def ausparkenRed():
     drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
     drive_for_cm.drive(-10, 8.5)
-    turn_for_degrees.turn(-15, 10.7, "right")
+    turn_for_degrees.turn(-15, 10.5, "right")
 
 
 def ausparken2Red():
@@ -459,7 +459,7 @@ def ausparken2Red():
     drive_for_cm.drive(10, 2.9)
     turn_for_degrees.turn(15, 44, "right")
     drive_for_cm.drive(-10, 7.6)
-    turn_for_degrees.turn(-15, 13, "right")
+    turn_for_degrees.turn(-15, 12.6, "right")
 
 
 
@@ -468,7 +468,7 @@ def absetzen():
     #absetzen
     motor_ele.on_for_rotations(50, 0.35)
     motor_zang.on_for_rotations(-50, 1)
-    motor_ele.on_for_rotations(-50, 0.85)
+    motor_ele.on_for_rotations(-50, 0.84)
     drive_for_cm.drive(5, 8.4)
 
 
@@ -491,7 +491,7 @@ def drifeToBrown():
 #-------------------------------
 
 #Abstand zu den Banden. Fareben bedeuten da, wo die Startbereiche den Farben am nächstens sind.
-startfeeld = "red"
+startfeeld = "green"
 
 wall_distance_green = 0 # in cm
 wall_distance_red = 1 #in cm
@@ -508,6 +508,8 @@ turn_for_degrees.set_motor_rotations_for_full_turn(4.35)
 
 motor_ele = LargeMotor(OUTPUT_D)
 motor_zang = MediumMotor(OUTPUT_A)
+
+drive_for_cm.drive(-20, 1000)
 
 
 
@@ -566,7 +568,7 @@ else:
 
 drive_for_cm.drive(65, 83)
 turn_for_degrees.turn(35, 37, "left")
-drive_for_cm.drive(35, 24.5)
+drive_for_cm.drive(35, 25)
 time.sleep(0.2)
 
 if startfeeld == "green":
@@ -615,32 +617,33 @@ else:
 absetzen()
 
 #Schrott in d'Eck bringen
-turn_for_degrees.turn(35, 46, "left")
-drive_for_cm.drive(52, 50)
+turn_for_degrees.turn(35, 40, "left")
+drive_for_cm.drive(52, 61)
 
-#zur Wasserleitung rasen
-turn_for_degrees.turn(-35, 44, "right")
-drive_for_cm.drive(-45, 12.5)
-turn_for_degrees.turn(-35, 90, "right")
-while motor_ele.position <= -39:
-    motor_ele.run_forever(speed_sp=500)
+turn_for_degrees.turn(30, 51.5, "left")
+
+while motor_ele.position <= -25:
+     motor_ele.run_forever(speed_sp=300)
 motor_ele.stop()
 
-#motor_ele.on_for_rotations(60, 0.72)
-drive_for_cm.drive(-45, 9.7)
+drive_for_cm.drive(-40, 13.25)
 
-#Klempner spielen  --> Wasserleitung reparerien
-motor_ele.on_for_rotations(-60, 0.5)
-turn_on_spot_for_degrees.turn(-35, 55)
-turn_on_spot_for_degrees.turn(35, 26)
+while motor_ele.position >= -200:
+     motor_ele.run_forever(speed_sp=-500)
+motor_ele.stop()
+
+drive_for_cm.drive(-30, 8.75)
+
+
 
 #zu den gelben Steinen fahren
 #--------------------------
 
-drive_for_cm.drive(70, 54)
-turn_for_degrees.turn(30, 70, "right")
+turn_for_degrees.turn(30, 90, "left")
+drive_for_cm.drive(50, 73)
 drive_for_cm.drive(40, 19.5)
-
+turn_on_spot_for_degrees.turn(30, 90)
+time.sleep(10)
 time.sleep(0.2)
 drive_for_cm.drive(-10, wall_distance_red)
 
