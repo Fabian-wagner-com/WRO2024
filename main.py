@@ -3,7 +3,7 @@
 import time
 from ev3dev2.motor import OUTPUT_A, OUTPUT_D, LargeMotor, MediumMotor
 from ev3dev2.sound import Sound
-from ev3dev2.sensor import INPUT_2
+from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor.lego import ColorSensor
 from ev3dev2.led import Leds
 
@@ -15,7 +15,7 @@ import math
 
 spkr = Sound()
 #color_sensor = ColorSensor(INPUT_3)
-line_sensor = ColorSensor(INPUT_2)
+line_sensor = ColorSensor(INPUT_1)
 move_motors = MoveSteering(OUTPUT_B, OUTPUT_C)
 
 leds = Leds()
@@ -408,7 +408,7 @@ def ausparken():
     drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
     drive_for_cm.drive(-10, 9.3)
-    turn_for_degrees.turn(-15, 11.65, "right")
+    #turn_for_degrees.turn(-15, 11.65, "right")
 
 
 def ausparken2():
@@ -416,27 +416,27 @@ def ausparken2():
     turn_for_degrees.turn(-15, 40, "left")
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 2.9)
-    turn_for_degrees.turn(15, 44, "right")
+    turn_for_degrees.turn(15, 40, "right")
     drive_for_cm.drive(-10, 8.1)
-    turn_for_degrees.turn(-15, 13.8, "right")
+    #turn_for_degrees.turn(-15, 13.8, "right")
 
 def ausparken3():
     #ausparken
     turn_for_degrees.turn(-15, 40, "left")
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 3.1)
-    turn_for_degrees.turn(15, 44, "right")
+    turn_for_degrees.turn(15, 42, "right")
     drive_for_cm.drive(-10, 7.5)
-    turn_for_degrees.turn(-15, 12.7, "right")
+    #turn_for_degrees.turn(-15, 12.7, "right")
 
 def ausparken4():
     #ausparken
     turn_for_degrees.turn(-15, 40, "left")
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 3.1)
-    turn_for_degrees.turn(15, 44, "right")
+    turn_for_degrees.turn(15, 42, "right")
     drive_for_cm.drive(-10, 7.3)
-    turn_for_degrees.turn(-15, 12, "right")
+    #turn_for_degrees.turn(-15, 12, "right")
 
 
 
@@ -448,18 +448,16 @@ def ausparkenRed():
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
-    drive_for_cm.drive(-10, 8.5)
-    turn_for_degrees.turn(-15, 10.5, "right")
+    drive_for_cm.drive(-10, 9.3)
 
 
 def ausparken2Red():
      #ausparken
     turn_for_degrees.turn(-15, 40, "left")
     turn_for_degrees.turn(15, 20, "right")
-    drive_for_cm.drive(10, 2.9)
+    drive_for_cm.drive(10, 3.1)
     turn_for_degrees.turn(15, 44, "right")
-    drive_for_cm.drive(-10, 7.6)
-    turn_for_degrees.turn(-15, 12.6, "right")
+    drive_for_cm.drive(-10, 9.3)
 
 
 
@@ -509,8 +507,6 @@ turn_for_degrees.set_motor_rotations_for_full_turn(4.35)
 motor_ele = LargeMotor(OUTPUT_D)
 motor_zang = MediumMotor(OUTPUT_A)
 
-drive_for_cm.drive(-20, 1000)
-
 
 
 spkr.speak('s')
@@ -545,7 +541,7 @@ if startfeeld == "green":
 else:
     ausparkenRed()
 
-beschleunigt.drive_for_cm_back(30, 5, 16)
+drive_for_cm.drive(-30, 16.2)
 
 #aufsammeln
 motor_ele.on_for_rotations(50, fahrstulbewegung)
@@ -562,13 +558,13 @@ motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 #rüber fahren
 if startfeeld == "green":
-    turn_for_degrees.turn(35, 127, "right")
+    turn_for_degrees.turn(35, 135, "right")
 else:
-    turn_for_degrees.turn(35, 127, "right")
+    turn_for_degrees.turn(35, 135, "right")
 
 drive_for_cm.drive(65, 83)
-turn_for_degrees.turn(35, 37, "left")
-drive_for_cm.drive(35, 25)
+turn_for_degrees.turn(35, 40, "left")
+drive_for_cm.drive(35, 28)
 time.sleep(0.2)
 
 if startfeeld == "green":
@@ -584,6 +580,7 @@ else:
 
 #nach hinten fahren bis zu braun
 drifeToBrown()
+drive_for_cm.drive(-20, 1)
 
 #drive_for_cm.drive(-30, 13)
 
@@ -610,25 +607,26 @@ if startfeeld == "green":
 else:
     turn_for_degrees.turn(35, 90, "right")
     drive_for_cm.drive(30, 42.3)
-    turn_on_spot_for_degrees.turn(-20, 90)
-    drive_for_cm.drive(50, 55)
+    turn_on_spot_for_degrees.turn(-20, 87)
+    drive_for_cm.drive(50, 57)
 
 
 absetzen()
 
 #Schrott in d'Eck bringen
-turn_for_degrees.turn(35, 40, "left")
+turn_for_degrees.turn(35, 42, "left")
 drive_for_cm.drive(52, 61)
 
-turn_for_degrees.turn(30, 51.5, "left")
+turn_for_degrees.turn(30, 53, "left")
+drive_for_cm.drive(40, 6.5)
 
-while motor_ele.position <= -25:
-     motor_ele.run_forever(speed_sp=300)
+while motor_ele.position <= -35:
+     motor_ele.run_forever(speed_sp=250)
 motor_ele.stop()
 
-drive_for_cm.drive(-40, 13.25)
+drive_for_cm.drive(-40, 17.7)
 
-while motor_ele.position >= -200:
+while motor_ele.position >= -220:
      motor_ele.run_forever(speed_sp=-500)
 motor_ele.stop()
 
@@ -640,10 +638,9 @@ drive_for_cm.drive(-30, 8.75)
 #--------------------------
 
 turn_for_degrees.turn(30, 90, "left")
-drive_for_cm.drive(50, 73)
-drive_for_cm.drive(40, 19.5)
-turn_on_spot_for_degrees.turn(30, 90)
-time.sleep(10)
+drive_for_cm.drive(70, 55)
+turn_on_spot_for_degrees.turn(-40, 90)
+drive_for_cm.drive(50, 26.7)
 time.sleep(0.2)
 drive_for_cm.drive(-10, wall_distance_red)
 
@@ -655,13 +652,14 @@ drive_for_cm.drive(-15, 6)
 drifeToBrown()
 
 
-drive_for_cm.drive(-30, 20.1)
+drive_for_cm.drive(-30, 21.2)
 
 #einsammeln
 motor_zang.on_for_rotations(-50, 0.4)
 motor_ele.on_for_rotations(50, fahrstulbewegung + 0.3)
 motor_zang.on_for_rotations(50, 1.4)
-motor_ele.on_for_rotations(-50, fahrstulbewegung)
+motor_ele.on_for_rotations(-50, fahrstulbewegung + 0.02)
+
 
 drive_for_cm.drive(-20, 9.8)
 motor_zang.on_for_rotations(-50, 1.2)
@@ -682,7 +680,7 @@ ausparken4()
 drive_for_cm.drive(-40, 10)
 drifeToBrown()
 
-drive_for_cm.drive(-30, 20)
+drive_for_cm.drive(-30, 21)
 
 #einsammeln
 motor_zang.on_for_rotations(-50, 1.4)
@@ -698,10 +696,13 @@ motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 #zum Gelben Abstellbereich
-turn_for_degrees.turn(30, 102, "right")
-drive_for_cm.drive(50, 49)
+turn_for_degrees.turn(30, 103, "right")
+drive_for_cm.drive(50, 49.5)
 absetzen()
 
+#schrott weg stoßen
+turn_for_degrees.turn(30, 60, "right")
+drive_for_cm.drive(90, 111)
 
 
 
