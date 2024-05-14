@@ -541,7 +541,7 @@ if startfeeld == "green":
 else:
     ausparkenRed()
 
-drive_for_cm.drive(-30, 16.2)
+drive_for_cm.drive(-20, 16.2)
 
 #aufsammeln
 motor_ele.on_for_rotations(50, fahrstulbewegung)
@@ -607,15 +607,15 @@ if startfeeld == "green":
 else:
     turn_for_degrees.turn(35, 90, "right")
     drive_for_cm.drive(30, 42.3)
-    turn_on_spot_for_degrees.turn(-20, 87)
+    turn_on_spot_for_degrees.turn(-20, 90)
     drive_for_cm.drive(50, 57)
 
 
 absetzen()
 
 #Schrott in d'Eck bringen
-turn_for_degrees.turn(35, 42, "left")
-drive_for_cm.drive(52, 61)
+turn_for_degrees.turn(35, 40, "left")
+drive_for_cm.drive(52, 61.5)
 
 turn_for_degrees.turn(30, 53, "left")
 drive_for_cm.drive(40, 6.5)
@@ -698,11 +698,31 @@ motor_ele.on_for_rotations(-50, fahrstulbewegung)
 #zum Gelben Abstellbereich
 turn_for_degrees.turn(30, 103, "right")
 drive_for_cm.drive(50, 49.5)
+turn_for_degrees.turn(30, 13, "left")
 absetzen()
 
 #schrott weg stoßen
+drive_for_cm.drive(30, 20)
 turn_for_degrees.turn(30, 60, "right")
-drive_for_cm.drive(90, 111)
+drive_for_cm.drive(-60, 139)
+turn_for_degrees.turn(35, 30, "right")
+drive_for_cm.drive(40, 5)
+
+turn_for_degrees.turn(35, 92, "right")
+drive_for_cm.drive(30, 7)
+
+while motor_ele.position <= -35:
+     motor_ele.run_forever(speed_sp=250)
+motor_ele.stop()
+
+drive_for_cm.drive(-40, 26.8)
+
+while motor_ele.position >= -220:
+     motor_ele.run_forever(speed_sp=-500)
+motor_ele.stop()
+
+drive_for_cm.drive(-30, 8.75)
+
 
 
 
