@@ -709,7 +709,7 @@ turn_for_degrees.turn(35, 30, "right")
 drive_for_cm.drive(40, 5)
 
 turn_for_degrees.turn(35, 92, "right")
-drive_for_cm.drive(30, 7)
+drive_for_cm.drive(30, 10)
 
 while motor_ele.position <= -35:
      motor_ele.run_forever(speed_sp=250)
