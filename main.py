@@ -493,6 +493,8 @@ startfeeld = "green"
 
 wall_distance_green = 0 # in cm
 wall_distance_red = 1 #in cm
+bandeWasser1 = 0.4
+bandeWasser2 = 0.8
 
 fahrstulbewegung = 0.32 + 0.01
 
@@ -558,7 +560,7 @@ motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 #rüber fahren
 if startfeeld == "green":
-    turn_for_degrees.turn(35, 135, "right")
+    turn_for_degrees.turn(35, 136, "right")
 else:
     turn_for_degrees.turn(35, 135, "right")
 
@@ -615,16 +617,16 @@ absetzen()
 
 #Schrott in d'Eck bringen
 turn_for_degrees.turn(35, 40, "left")
-drive_for_cm.drive(52, 61.5)
+drive_for_cm.drive(52, 59.7)
 
 turn_for_degrees.turn(30, 53, "left")
-drive_for_cm.drive(40, 6.5)
+drive_for_cm.drive(40, 7)
 
 while motor_ele.position <= -35:
      motor_ele.run_forever(speed_sp=250)
 motor_ele.stop()
 
-drive_for_cm.drive(-40, 17.7)
+drive_for_cm.drive(-40, 17 + bandeWasser1)
 
 while motor_ele.position >= -220:
      motor_ele.run_forever(speed_sp=-500)
@@ -638,7 +640,7 @@ drive_for_cm.drive(-30, 8.75)
 #--------------------------
 
 turn_for_degrees.turn(30, 90, "left")
-drive_for_cm.drive(70, 55)
+drive_for_cm.drive(70, 52)
 turn_on_spot_for_degrees.turn(-40, 90)
 drive_for_cm.drive(50, 26.7)
 time.sleep(0.2)
@@ -652,7 +654,7 @@ drive_for_cm.drive(-15, 6)
 drifeToBrown()
 
 
-drive_for_cm.drive(-30, 21.2)
+drive_for_cm.drive(-25, 21.2)
 
 #einsammeln
 motor_zang.on_for_rotations(-50, 0.4)
@@ -670,14 +672,14 @@ motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 
 #rüber fahren
-turn_for_degrees.turn(35, 120, "right")
+turn_for_degrees.turn(35, 121.5, "right")
 drive_for_cm.drive(70, 90)
 turn_for_degrees.turn(70, 30, "left")
 drive_for_cm.drive(50, 12)
 drive_for_cm.drive(-10, wall_distance_green)
 
 ausparken4()
-drive_for_cm.drive(-40, 10)
+drive_for_cm.drive(-40, 17)
 drifeToBrown()
 
 drive_for_cm.drive(-30, 21)
@@ -696,15 +698,15 @@ motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 #zum Gelben Abstellbereich
-turn_for_degrees.turn(30, 103, "right")
-drive_for_cm.drive(50, 49.5)
-turn_for_degrees.turn(30, 13, "left")
+turn_for_degrees.turn(30, 107, "right")
+drive_for_cm.drive(50, 49)
+turn_for_degrees.turn(30, 17, "left")
 absetzen()
 
 #schrott weg stoßen
 drive_for_cm.drive(30, 20)
-turn_for_degrees.turn(30, 60, "right")
-drive_for_cm.drive(-60, 139)
+turn_for_degrees.turn(30, 64, "right")
+drive_for_cm.drive(-60, 141)
 turn_for_degrees.turn(35, 30, "right")
 drive_for_cm.drive(40, 5)
 
@@ -715,18 +717,20 @@ while motor_ele.position <= -35:
      motor_ele.run_forever(speed_sp=250)
 motor_ele.stop()
 
-drive_for_cm.drive(-40, 26.8)
+drive_for_cm.drive(-40, 26 + bandeWasser2)
 
 while motor_ele.position >= -220:
      motor_ele.run_forever(speed_sp=-500)
 motor_ele.stop()
 
-drive_for_cm.drive(-30, 8.75)
+drive_for_cm.drive(-30, 9)
 
 
 
-
-
+#putty - Kopie.exe  in download
+#ev3dev eintregen
+#robot maker 
+#rm zum löschen
 
 
 
@@ -747,3 +751,6 @@ print( duration, " Sekunden")
 minutes = duration // 60
 seconds = duration - 60 * minutes
 print(round(minutes, 0), " Minuten und ", round(seconds, 2), " Sekunden")
+
+
+
