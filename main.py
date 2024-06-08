@@ -7,6 +7,8 @@ from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor.lego import ColorSensor
 from ev3dev2.led import Leds
 
+from ev3dev2.display import Display
+
 from ev3dev2.motor import OUTPUT_B, OUTPUT_C, MoveSteering, LargeMotor
 from ev3dev2.button import Button
 
@@ -416,7 +418,7 @@ def ausparken2():
     turn_for_degrees.turn(-15, 40, "left")
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 2.9)
-    turn_for_degrees.turn(15, 40, "right")
+    turn_for_degrees.turn(15, 41, "right")
     drive_for_cm.drive(-10, 8.1)
     #turn_for_degrees.turn(-15, 13.8, "right")
 
@@ -467,7 +469,7 @@ def absetzen():
     motor_ele.on_for_rotations(50, 0.35)
     motor_zang.on_for_rotations(-50, 1)
     motor_ele.on_for_rotations(-50, 0.84)
-    drive_for_cm.drive(5, 8.4)
+    drive_for_cm.drive(20, 8.4)
 
 
 def drifeToBrown():
@@ -496,7 +498,9 @@ wall_distance_red = 0.6 #in cm
 bandeWasser1 = 0.6
 bandeWasser2 = 0.6
 
-fahrstulbewegung = 0.32 + 0.01
+fahrstulbewegung = 0.32
+
+steinschubSpeed = -20
 
 #steinfarben
 stein1 = ""
@@ -508,6 +512,8 @@ turn_for_degrees.set_motor_rotations_for_full_turn(4.35)
 
 motor_ele = LargeMotor(OUTPUT_D)
 motor_zang = MediumMotor(OUTPUT_A)
+
+lcd = Display()
 
 
 
@@ -543,14 +549,14 @@ if startfeeld == "green":
 else:
     ausparkenRed()
 
-drive_for_cm.drive(-20, 16.2)
+drive_for_cm.drive(steinschubSpeed, 16.2)
 
 #aufsammeln
 motor_ele.on_for_rotations(50, fahrstulbewegung)
 motor_zang.on_for_rotations(50, 1.2)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
-beschleunigt.drive_for_cm_back(30, 5, 9.8)
+beschleunigt.drive_for_cm_back(steinschubSpeed, 5, 9.8)
 motor_zang.on_for_rotations(-50, 1.2)
 
 motor_ele.on_for_rotations(50, fahrstulbewegung)
@@ -582,7 +588,7 @@ else:
 
 #nach hinten fahren bis zu braun
 drifeToBrown()
-drive_for_cm.drive(-20, 1)
+drive_for_cm.drive(steinschubSpeed, 1)
 
 #drive_for_cm.drive(-30, 13)
 
@@ -592,7 +598,7 @@ motor_ele.on_for_rotations(50, fahrstulbewegung)
 motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
-drive_for_cm.drive(-20, 9.8)
+drive_for_cm.drive(steinschubSpeed, 9.8)
 motor_zang.on_for_rotations(-50, 1.4)
 
 motor_ele.on_for_rotations(50, fahrstulbewegung)
@@ -617,7 +623,7 @@ absetzen()
 
 #Schrott in d'Eck bringen
 turn_for_degrees.turn(35, 41, "left")
-drive_for_cm.drive(52, 60.5)
+drive_for_cm.drive(52, 62)
 
 turn_for_degrees.turn(30, 53, "left")
 drive_for_cm.drive(40, 7)
@@ -639,10 +645,10 @@ drive_for_cm.drive(-30, 8.75)
 #zu den gelben Steinen fahren
 #--------------------------
 
-turn_for_degrees.turn(30, 90, "left")
+turn_for_degrees.turn(30, 80, "left")
 drive_for_cm.drive(70, 52)
-turn_on_spot_for_degrees.turn(-40, 90)
-drive_for_cm.drive(50, 26.7)
+turn_on_spot_for_degrees.turn(-40, 75)
+drive_for_cm.drive(50, 20)
 time.sleep(0.2)
 drive_for_cm.drive(-10, wall_distance_red)
 
@@ -654,7 +660,7 @@ drive_for_cm.drive(-15, 6)
 drifeToBrown()
 
 
-drive_for_cm.drive(-25, 21.2)
+drive_for_cm.drive(steinschubSpeed, 21.2)
 
 #einsammeln
 motor_zang.on_for_rotations(-50, 0.4)
@@ -663,7 +669,7 @@ motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung + 0.02)
 
 
-drive_for_cm.drive(-20, 9.8)
+drive_for_cm.drive(steinschubSpeed, 9.8)
 motor_zang.on_for_rotations(-50, 1.2)
 
 motor_ele.on_for_rotations(50, fahrstulbewegung)
@@ -682,7 +688,7 @@ ausparken4()
 drive_for_cm.drive(-40, 17)
 drifeToBrown()
 
-drive_for_cm.drive(-30, 21)
+drive_for_cm.drive(steinschubSpeed, 21)
 
 #einsammeln
 motor_zang.on_for_rotations(-50, 1.4)
@@ -691,13 +697,14 @@ motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 drive_for_cm.drive(-20, 9.8)
-motor_zang.on_for_rotations(-50, 1.4)
+motor_zang.on_for_rotations(steinschubSpeed, 1.4)
 
 motor_ele.on_for_rotations(50, fahrstulbewegung)
 motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 #zum Gelben Abstellbereich
+drive_for_cm.drive(-30, 0.5)
 turn_for_degrees.turn(30, 100, "right")
 drive_for_cm.drive(50, 49)
 turn_for_degrees.turn(30, 10, "left")
@@ -752,6 +759,10 @@ print( duration, " Sekunden")
 
 minutes = duration // 60
 seconds = duration - 60 * minutes
+
+lcd.draw.text((60, 50), str(minutes), "min", str(seconds), "sec", font='luBS24')
+lcd.update()
+
 print(round(minutes, 0), " Minuten und ", round(seconds, 2), " Sekunden")
 
 
