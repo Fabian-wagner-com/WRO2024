@@ -467,7 +467,7 @@ def ausparken2Red():
 def absetzen():
     #absetzen
     motor_ele.on_for_rotations(50, 0.35)
-    motor_zang.on_for_rotations(-50, 1)
+    motor_zang.on_for_rotations(-50, 1.05)
     motor_ele.on_for_rotations(-50, 0.84)
     drive_for_cm.drive(20, 8.4)
 
@@ -556,7 +556,7 @@ motor_ele.on_for_rotations(50, fahrstulbewegung)
 motor_zang.on_for_rotations(50, 1.2)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
-beschleunigt.drive_for_cm_back(steinschubSpeed, 5, 9.8)
+drive_for_cm.drive(steinschubSpeed, 9.8)
 motor_zang.on_for_rotations(-50, 1.2)
 
 motor_ele.on_for_rotations(50, fahrstulbewegung)
@@ -696,8 +696,8 @@ motor_ele.on_for_rotations(50, fahrstulbewegung)
 motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
-drive_for_cm.drive(-20, 9.8)
-motor_zang.on_for_rotations(steinschubSpeed, 1.4)
+drive_for_cm.drive(steinschubSpeed, 9.8)
+motor_zang.on_for_rotations(-50, 1.4)
 
 motor_ele.on_for_rotations(50, fahrstulbewegung)
 motor_zang.on_for_rotations(50, 1.4)
@@ -713,18 +713,16 @@ absetzen()
 #schrott weg stoßen
 drive_for_cm.drive(30, 20)
 turn_for_degrees.turn(30, 59, "right")
-drive_for_cm.drive(-60, 141)
-turn_for_degrees.turn(35, 30, "right")
+drive_for_cm.drive(-60, 136)
 drive_for_cm.drive(40, 5)
+turn_for_degrees.turn(35, 119, "right")
 
-turn_for_degrees.turn(35, 95.6, "right")
-#drive_for_cm.drive(30, 10)
 
 while motor_ele.position <= -35:
      motor_ele.run_forever(speed_sp=250)
 motor_ele.stop()
 
-drive_for_cm.drive(-40, 24.5 + bandeWasser2)
+drive_for_cm.drive(-40, 13.5)
 
 while motor_ele.position >= -220:
      motor_ele.run_forever(speed_sp=-500)
@@ -759,9 +757,6 @@ print( duration, " Sekunden")
 
 minutes = duration // 60
 seconds = duration - 60 * minutes
-
-lcd.draw.text((60, 50), str(minutes), "min", str(seconds), "sec", font='luBS24')
-lcd.update()
 
 print(round(minutes, 0), " Minuten und ", round(seconds, 2), " Sekunden")
 
