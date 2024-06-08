@@ -616,11 +616,14 @@ else:
 absetzen()
 
 #Schrott in d'Eck bringen
-turn_for_degrees.turn(35, 41, "left")
-drive_for_cm.drive(52, 60.5)
+drive_for_cm.drive(40, 10)
+turn_for_degrees.turn(35, 40, "left")
+drive_for_cm.drive(40, 46)
+turn_for_degrees.turn(35, 60, "left")
 
-turn_for_degrees.turn(30, 53, "left")
-drive_for_cm.drive(40, 7)
+time.sleep(1)
+
+drive_for_cm.drive(40, 20)
 
 while motor_ele.position <= -35:
      motor_ele.run_forever(speed_sp=250)
@@ -710,14 +713,14 @@ drive_for_cm.drive(-60, 141)
 turn_for_degrees.turn(35, 30, "right")
 drive_for_cm.drive(40, 5)
 
-turn_for_degrees.turn(35, 95.6, "right")
+turn_for_degrees.turn(35, 92.5, "right")
 #drive_for_cm.drive(30, 10)
 
 while motor_ele.position <= -35:
      motor_ele.run_forever(speed_sp=250)
 motor_ele.stop()
 
-drive_for_cm.drive(-40, 24.5 + bandeWasser2)
+drive_for_cm.drive(-40, 26 + bandeWasser2)
 
 while motor_ele.position >= -220:
      motor_ele.run_forever(speed_sp=-500)
