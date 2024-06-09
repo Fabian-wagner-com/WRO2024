@@ -418,7 +418,7 @@ def ausparken2():
     turn_for_degrees.turn(-15, 40, "left")
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 2.9)
-    turn_for_degrees.turn(17, 43, "right")
+    turn_for_degrees.turn(17, 44, "right")
     drive_for_cm.drive(-10, 8.1)
     #turn_for_degrees.turn(-15, 13.8, "right")
 
@@ -491,7 +491,7 @@ def drifeToBrown():
 #-------------------------------
 
 #Abstand zu den Banden. Fareben bedeuten da, wo die Startbereiche den Farben am nächstens sind.
-startfeeld = "green" #green or red
+startfeeld = "red" #green or red
 
 wall_distance_green = 0.6 # in cm
 wall_distance_red = 0.6 #in cm
@@ -620,6 +620,7 @@ else:
 
 
 absetzen()
+drive_for_cm.drive(30, 0.8)
 
 #Schrott in d'Eck bringen
 turn_for_degrees.turn(35, 41, "left")
@@ -705,31 +706,71 @@ motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 
 #zum Gelben Abstellbereich
-drive_for_cm.drive(-30, 1)
+drive_for_cm.drive(-30, 1.3)
 turn_for_degrees.turn(30, 100, "right")
 drive_for_cm.drive(50, 49)
 turn_for_degrees.turn(30, 10, "left")
 absetzen()
 
+
 #schrott weg stoßen
 drive_for_cm.drive(30, 20)
-turn_for_degrees.turn(30, 59, "right")
+turn_for_degrees.turn(30, 57.5, "right")
 drive_for_cm.drive(-60, 136)
 drive_for_cm.drive(40, 5)
-turn_for_degrees.turn(35, 119, "right")
+turn_for_degrees.turn(35, 121, "right")
 
 
 while motor_ele.position <= -35:
      motor_ele.run_forever(speed_sp=250)
 motor_ele.stop()
 
-drive_for_cm.drive(-40, 13.5)
+drive_for_cm.drive(-40, 15.7)
 
 while motor_ele.position >= -220:
      motor_ele.run_forever(speed_sp=-500)
 motor_ele.stop()
 
 drive_for_cm.drive(-30, 9)
+
+
+#zum wegschieben
+turn_for_degrees.turn(30, 30, "left")
+drive_for_cm.drive(50, 50)
+turn_for_degrees.turn(35, 50, "right")
+drive_for_cm.drive(50, 10)
+ausparken4()
+drive_for_cm.drive(-40, 34)
+drifeToBrown()
+if startfeeld == "green":
+    drive_for_cm.drive(-70, 79 - 9.5)
+else:
+    drive_for_cm.drive(-70, 79)
+
+
+
+
+
+
+# #schrott weg stoßen
+# drive_for_cm.drive(30, 20)
+# turn_for_degrees.turn(30, 59, "right")
+# drive_for_cm.drive(-60, 136)
+# drive_for_cm.drive(40, 5)
+# turn_for_degrees.turn(35, 119, "right")
+
+
+# while motor_ele.position <= -35:
+#      motor_ele.run_forever(speed_sp=250)
+# motor_ele.stop()
+
+# drive_for_cm.drive(-40, 13.5)
+
+# while motor_ele.position >= -220:
+#      motor_ele.run_forever(speed_sp=-500)
+# motor_ele.stop()
+
+# drive_for_cm.drive(-30, 9)
 
 
 
