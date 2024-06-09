@@ -418,7 +418,7 @@ def ausparken2():
     turn_for_degrees.turn(-15, 40, "left")
     turn_for_degrees.turn(15, 20, "right")
     drive_for_cm.drive(10, 2.9)
-    turn_for_degrees.turn(15, 41, "right")
+    turn_for_degrees.turn(17, 43, "right")
     drive_for_cm.drive(-10, 8.1)
     #turn_for_degrees.turn(-15, 13.8, "right")
 
@@ -491,7 +491,7 @@ def drifeToBrown():
 #-------------------------------
 
 #Abstand zu den Banden. Fareben bedeuten da, wo die Startbereiche den Farben am nächstens sind.
-startfeeld = "green"
+startfeeld = "green" #green or red
 
 wall_distance_green = 0.6 # in cm
 wall_distance_red = 0.6 #in cm
@@ -623,7 +623,7 @@ absetzen()
 
 #Schrott in d'Eck bringen
 turn_for_degrees.turn(35, 41, "left")
-drive_for_cm.drive(52, 62)
+drive_for_cm.drive(52, 61)
 
 turn_for_degrees.turn(30, 53, "left")
 drive_for_cm.drive(40, 7)
@@ -685,7 +685,7 @@ drive_for_cm.drive(50, 12)
 drive_for_cm.drive(-10, wall_distance_green)
 
 ausparken4()
-drive_for_cm.drive(-40, 17)
+drive_for_cm.drive(-40, 12)
 drifeToBrown()
 
 drive_for_cm.drive(steinschubSpeed, 21)
@@ -703,12 +703,24 @@ motor_ele.on_for_rotations(50, fahrstulbewegung)
 motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
+
+drive_for_cm.drive(-40, 37.1)
+turn_for_degrees.turn(25, 45, "right")
+drive_for_cm.drive(50, 44.5)
+turn_for_degrees.turn(-30, 41.5, "left")
+drive_for_cm.drive(40, 24.7)
+absetzen()
+
+
+
+"""
 #zum Gelben Abstellbereich
 drive_for_cm.drive(-30, 0.5)
 turn_for_degrees.turn(30, 100, "right")
 drive_for_cm.drive(50, 49)
 turn_for_degrees.turn(30, 10, "left")
 absetzen()
+"""
 
 #schrott weg stoßen
 drive_for_cm.drive(30, 20)
@@ -722,7 +734,7 @@ while motor_ele.position <= -35:
      motor_ele.run_forever(speed_sp=250)
 motor_ele.stop()
 
-drive_for_cm.drive(-40, 13.5)
+drive_for_cm.drive(-40, 14.5)
 
 while motor_ele.position >= -220:
      motor_ele.run_forever(speed_sp=-500)
@@ -746,8 +758,6 @@ drive_for_cm.drive(-30, 9)
 
 
 
-
-spkr.speak('good job')
 
 #Zeit ausgeben
 #-------------------------------
