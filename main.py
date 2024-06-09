@@ -704,23 +704,12 @@ motor_zang.on_for_rotations(50, 1.4)
 motor_ele.on_for_rotations(-50, fahrstulbewegung)
 
 
-drive_for_cm.drive(-40, 37.1)
-turn_for_degrees.turn(25, 45, "right")
-drive_for_cm.drive(50, 44.5)
-turn_for_degrees.turn(-30, 41.5, "left")
-drive_for_cm.drive(40, 24.7)
-absetzen()
-
-
-
-"""
 #zum Gelben Abstellbereich
-drive_for_cm.drive(-30, 0.5)
+drive_for_cm.drive(-30, 1)
 turn_for_degrees.turn(30, 100, "right")
 drive_for_cm.drive(50, 49)
 turn_for_degrees.turn(30, 10, "left")
 absetzen()
-"""
 
 #schrott weg stoßen
 drive_for_cm.drive(30, 20)
@@ -734,14 +723,13 @@ while motor_ele.position <= -35:
      motor_ele.run_forever(speed_sp=250)
 motor_ele.stop()
 
-drive_for_cm.drive(-40, 14.5)
+drive_for_cm.drive(-40, 13.5)
 
 while motor_ele.position >= -220:
      motor_ele.run_forever(speed_sp=-500)
 motor_ele.stop()
 
 drive_for_cm.drive(-30, 9)
-
 
 
 
